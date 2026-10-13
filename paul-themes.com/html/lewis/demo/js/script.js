@@ -512,7 +512,7 @@
 
         videoItem.addClass('is-active');
         if (url) {
-            videoItem.append('<iframe src="https://player.vimeo.com/video/' + url + '?title=0&byline=0&portrait=0&autoplay=1&autopause=0&muted=1&background=1" title="Lewis portfolio project video" allow="autoplay; fullscreen; picture-in-picture" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>');
+            videoItem.append('<iframe src="https://player.vimeo.com/video/' + url + '?title=0&byline=0&portrait=0&autoplay=1&autopause=0&muted=1&background=1&loop=1&playsinline=1" title="Lewis portfolio project video" allow="autoplay; fullscreen; picture-in-picture" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>');
         }
         // .append('<iframe src="https://player.vimeo.com/video/' + url + '?title=0&byline=0&portrait=0&autoplay=1&autopause=0&muted=1&background=1&#t=' + iStart + '" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>');
         resizeIframe();
