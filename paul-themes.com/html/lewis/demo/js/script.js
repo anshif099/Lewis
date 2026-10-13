@@ -245,12 +245,10 @@
             return;
         }
 
-        if (iframe) {
-            // Reload the muted Vimeo embed from the click gesture so autoplay is not
-            // attempted while its container is hidden during initial page load.
-            iframe.src = iframe.src;
-        }
         $videoContainer.fadeIn();
+        if (iframe && iframe.contentWindow) {
+            iframe.contentWindow.postMessage(JSON.stringify({ method: 'play' }), '*');
+        }
         $button.addClass('active').attr('aria-label', 'Pause background video').html('<i class="icon ion-ios-pause"></i>');
     });
 
