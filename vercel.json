@@ -1,0 +1,10 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "outputDirectory": "paul-themes.com/html/lewis/demo",
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/home-piling.html"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+﻿*
+!.gitignore
+!vercel.json
+!paul-themes.com/
+paul-themes.com/*
+!paul-themes.com/html/
+paul-themes.com/html/*
+!paul-themes.com/html/lewis/
+paul-themes.com/html/lewis/*
+!paul-themes.com/html/lewis/demo/
+!paul-themes.com/html/lewis/demo/**
