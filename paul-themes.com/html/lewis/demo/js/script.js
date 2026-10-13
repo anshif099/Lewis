@@ -232,13 +232,26 @@
     -------------------------------------------------------------------------------*/
 
     $('.a-video-play').on('click', function() {
-        if ($(this).hasClass('active')) {
-            $('.video-container').fadeOut();
-            $(this).removeClass('active').html('<i class="icon ion-ios-play"></i>');
-        } else {
-            $('.video-container').fadeIn();
-            $(this).addClass('active').html('<i class="icon ion-ios-pause"></i>');
+        var $button = $(this);
+        var $videoContainer = $('.video-container').first();
+        var iframe = $videoContainer.find('iframe')[0];
+
+        if ($button.hasClass('active')) {
+            if (iframe && iframe.contentWindow) {
+                iframe.contentWindow.postMessage(JSON.stringify({ method: 'pause' }), '*');
+            }
+            $videoContainer.fadeOut();
+            $button.removeClass('active').attr('aria-label', 'Play background video').html('<i class="icon ion-ios-play"></i>');
+            return;
         }
+
+        if (iframe) {
+            // Reload the muted Vimeo embed from the click gesture so autoplay is not
+            // attempted while its container is hidden during initial page load.
+            iframe.src = iframe.src;
+        }
+        $videoContainer.fadeIn();
+        $button.addClass('active').attr('aria-label', 'Pause background video').html('<i class="icon ion-ios-pause"></i>');
     });
 
     function resizeVideo() {
@@ -248,17 +261,11 @@
             var iWidth = $(this).data('vimeo-width');
             var iHeight = $(this).data('vimeo-height');
 
-            if (height / width > iHeight / iWidth) {
-                $(this).find('iframe').css({
-                    'width': '500%',
-                    'height': '100%'
-                });
-            } else {
-                $(this).find('iframe').css({
-                    'width': '100%',
-                    'height': '500%'
-                });
-            }
+            var scale = Math.max(width / iWidth, height / iHeight);
+            $(this).find('iframe').css({
+                'width': Math.ceil(iWidth * scale) + 'px',
+                'height': Math.ceil(iHeight * scale) + 'px'
+            });
         });
     }
 
